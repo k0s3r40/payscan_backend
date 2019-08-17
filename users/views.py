@@ -16,12 +16,3 @@ class CreateUser(generics.CreateAPIView):
 
 
 
-
-def get_user_amount(request):
-    get_data = request.GET
-    token = request.GET['token']
-    token_obj = Token.objects.get(key=token)
-    request.user = token_obj.user
-
-    return JsonResponse({'amount':str(request.user.amount)})
-

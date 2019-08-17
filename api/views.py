@@ -6,7 +6,7 @@ import qrcode
 import logging as L
 
 # Create your views here.
-
+from rest_framework.authtoken.models import Token
 from re import sub
 
 
@@ -26,6 +26,14 @@ def generate_qr(request):
                                   int(datetime.datetime.now().timestamp()), data, '.png')
     img.save(filename)
     return JsonResponse({'qr_code': '/media/' + filename.split('/media/')[1]})
+
+def get_user_amount(request):
+    get_data = request.GET
+    token = request.GET['token']
+    token_obj = Token.objects.get(key=token)
+    request.user = token_obj.user
+
+    return JsonResponse({'amount': str(request.user.amount)})
 
     #
     # header_token = request.META.get('HTTP_AUTHORIZATION', None)
