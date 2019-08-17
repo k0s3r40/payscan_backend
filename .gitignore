@@ -1,0 +1,24 @@
+# virtualenv's files
+/bin/
+/lib/
+/build/
+/share
+/local/
+/include/
+/src/
+/.Python
+
+# IDE's 
+.idea
+.vscode
+/.settings/
+.project
+
+# Compiled files
+*.pyo
+*.pyc
+
+# Temp/OS files
+.DS_Store
+/postgresql-*
+
