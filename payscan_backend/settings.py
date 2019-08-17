@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'users',
     'api',
+    'shopping_demo'
 ]
 
 MIDDLEWARE = [
