@@ -1,6 +1,7 @@
 # users/serializers.py
 from rest_framework import serializers
 from .models import User
+from django.http import JsonResponse
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,8 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('email', 'password')
 
     def create(self, validated_data):
-        user = super(UserSerializer, self).create(validated_data)
-        user.set_password(validated_data['password'])
-        user.username=validated_data['email']
-        user.save()
-        return user
+        if not User.objects.filter(email=validated_data['email']).first():
+            user = super(UserSerializer, self).create(validated_data)
+            user.set_password(validated_data['password'])
+            user.username=validated_data['email']
+            user.email = validated_data['email']
+            user.save()
+            return user
+        return JsonResponse({'test':'test'})
