@@ -19,11 +19,12 @@ def generate_qr(request):
     )
 
     data = request.GET['qr_data']
+    sender_token = request.GET['sender_token']
     qr.add_data(data)
     qr.make(fit=True)
     img = qr.make_image()
     filename = "{}{}-{}{}".format(settings.MEDIA_ROOT + 'transactions/qr_codes/',
-                                  int(datetime.datetime.now().timestamp()), data, '.png')
+                                  int(datetime.datetime.now().timestamp()), data+'TOKEN'+sender_token, '.png')
     img.save(filename)
     return JsonResponse({'qr_code': '/media/' + filename.split('/media/')[1]})
 
@@ -43,8 +44,9 @@ def add_money(request):
     get_data = request.GET
     token = request.GET['token']
     amount=request.GET['amount']
+
     try:
-        token_obj = Token.objects.get(key=token)
+        token_obj = Token.objects.get(key=amount.split('TOKEN')[1])
         user = token_obj.user
         user.amount = user.amount + int(amount)
         user.save()
