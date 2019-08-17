@@ -12,3 +12,5 @@ class CreateUser(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
+
+
