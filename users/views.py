@@ -22,5 +22,6 @@ def get_user_amount(request):
     token = request.GET['token']
     token_obj = Token.objects.get(key=token)
     request.user = token_obj.user
-    return JsonResponse({'amount':request.user.amount})
+
+    return JsonResponse({'amount':str(request.user.amount)})
 
