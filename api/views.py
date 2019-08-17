@@ -30,9 +30,11 @@ def generate_qr(request):
 def get_user_amount(request):
     get_data = request.GET
     token = request.GET['token']
-    token_obj = Token.objects.get(key=token)
-    request.user = token_obj.user
-
+    try:
+        token_obj = Token.objects.get(key=token)
+        request.user = token_obj.user
+    except:
+        return JsonResponse({'amount': "0000"})
     return JsonResponse({'amount': str(request.user.amount)})
 
     #
