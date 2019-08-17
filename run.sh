@@ -1,4 +1,5 @@
 #!/bin/bash
+git pull origin master
 . bin/activate
 git pull origin master
 pip install -r requirements.txt
