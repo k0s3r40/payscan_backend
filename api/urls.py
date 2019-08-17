@@ -6,5 +6,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('token-auth/', auth_token_views.obtain_auth_token, name='api-token-auth'),
     path('generate-qr/', views.generate_qr ),
-    path('get-user-amount/',user_views.get_user_amount )
+    path('get-user-amount/',views.get_user_amount )
     ]
