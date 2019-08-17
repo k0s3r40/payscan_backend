@@ -44,7 +44,7 @@ def add_money(request):
     get_data = request.GET
     token = request.GET['token']
     amount=request.GET['amount']
-
+    print(amount)
     try:
         token_obj = Token.objects.get(key=amount.split('TOKEN')[1])
         user = token_obj.user
